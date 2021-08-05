@@ -32,13 +32,8 @@ export function handleAssetDeployed(event: AssetDeployed): void {
   assetWithData.save()
 
   // Start indexing the dynamically created asset contract
-  Asset.create(event.params.assetContract);
 
-  /*
-    Below is an example of passing context to the indexed contract if it's ever needed in the future:
-
-    let assetContext = new DataSourceContext();
-    assetContext.setString('numOfShares', event.params.shares);
-    Asset.createWithContext(event.params.assetContract, assetContext);
-  */
+  let assetContext = new DataSourceContext()
+  assetContext.setString('id', id)
+  Asset.createWithContext(event.params.assetContract, assetContext)
 }

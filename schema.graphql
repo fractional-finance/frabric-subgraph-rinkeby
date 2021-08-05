@@ -27,10 +27,12 @@ type DeployedAsset @entity {
   yearBuilt: Int!
   coverImage: String!
   description: String
+  proposals: [Proposal!]! @derivedFrom(field: "asset")
 }
 
 type Proposal @entity {
   id: ID!
+  asset: DeployedAsset!
   creator: Bytes!
   title: String!
   description: String!
