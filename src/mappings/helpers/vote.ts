@@ -8,9 +8,8 @@ export function createOrUpdateVote(
 ): void {
   let proposalIdHex = proposalId.toHex()
   
-  let proposalIdString = proposalId.toString()
   let voterAddressString = voterAddress.toString()
-  let voteId = proposalIdString + "-" + voterAddressString
+  let voteId = proposalIdHex + "-" + voterAddressString
 
   let vote = Vote.load(voteId)
   if (vote == null) {

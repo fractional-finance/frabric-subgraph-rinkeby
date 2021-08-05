@@ -43,6 +43,7 @@ type Proposal @entity {
 }
 
 type Vote @entity {
+  id: ID!
   proposal: Proposal!
   voter: Bytes!
   voteType: VoteType!
