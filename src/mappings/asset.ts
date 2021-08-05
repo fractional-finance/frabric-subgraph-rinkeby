@@ -1,14 +1,21 @@
 import { NewProposal, YesVote, NoVote, AbstainVote } from '../generated/Frabric/Asset'
 import { Proposal } from '../generated/schema'
 import { createOrUpdateVote } from './helpers/vote'
+import { loadOffChainDataForProposal } from './helpers/proposal'
 
 export function handleNewProposal(event: NewProposal): void {
   let proposal = new Proposal(event.params.id.toHex())
   proposal.creator = event.params.creator
-  proposal.dataURI = event.params.info
   proposal.startTimestamp = event.block.timestamp
   proposal.endTimestamp = event.params.expires
-  proposal.save()
+
+  let proposalWithData = loadOffChainDataForProposal(proposal, event.params.info)
+  if (proposalWithData == null) {
+    // Proposal data could not be retrieved
+    return
+  }
+
+  proposalWithData.save()
 }
 
 export function handleYesVote(event: YesVote): void {

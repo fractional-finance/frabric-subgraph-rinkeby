@@ -1,6 +1,7 @@
 import { AssetMinted, AssetDeployed } from '../generated/Frabric/Platform'
 import { MintedAsset, DeployedAsset } from '../generated/schema'
 import { Asset } from '../generated/templates'
+import { loadOffChainDataForAsset } from './helpers/asset'
 
 export function handleAssetMinted(event: AssetMinted): void {
   let asset = new MintedAsset(event.params.id.toHex())
@@ -20,9 +21,15 @@ export function handleAssetDeployed(event: AssetDeployed): void {
 
   let deployedAsset = new DeployedAsset(id)
   deployedAsset.contract = event.params.assetContract
-  deployedAsset.dataURI = asset.dataURI
   deployedAsset.numOfShares = event.params.shares
-  deployedAsset.save()
+
+  let assetWithData = loadOffChainDataForAsset(deployedAsset, event.params.data)
+  if (assetWithData == null) {
+    // Asset data could not be retrieved
+    return
+  }
+
+  assetWithData.save()
 
   // Start indexing the dynamically created asset contract
   Asset.create(event.params.assetContract);
