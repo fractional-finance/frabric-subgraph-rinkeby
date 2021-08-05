@@ -5,7 +5,7 @@ type _Schema_
     name: "assetSearch"
     language: en
     algorithm: rank
-    include: [{ entity: "MintedAsset", fields: [{ name: "contract" }] }]
+    include: [{ entity: "DeployedAsset", fields: [{ name: "contract" }] }]
   )
 
 type MintedAsset @entity {
