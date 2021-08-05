@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.2
 description: Frabric Protocol
 repository: https://github.com/fractional-finance/frabric-subgraph
 schema:
@@ -26,7 +26,6 @@ dataSources:
           handler: handleAssetMinted
         - event: AssetDeployed(uint256,address,uint256,address,uint256)
           handler: handleAssetDeployed
-      file: ./src/mapping.ts
 templates:
   - name: Asset
     kind: ethereum/contract
