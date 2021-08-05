@@ -1,3 +1,4 @@
+import { DataSourceContext, log } from '@graphprotocol/graph-ts';
 import { AssetMinted, AssetDeployed } from '../generated/Frabric/Platform'
 import { MintedAsset, DeployedAsset } from '../generated/schema'
 import { Asset } from '../generated/templates'
@@ -14,7 +15,7 @@ export function handleAssetDeployed(event: AssetDeployed): void {
 
   let asset = MintedAsset.load(id)
   if (asset == null) {
-    // Asset can't be deployed without prior minting
+    log.error("Asset can't be deployed without prior minting", [])
     // TODO: Is it possible to throw an error here?
     return
   }
@@ -25,7 +26,7 @@ export function handleAssetDeployed(event: AssetDeployed): void {
 
   let assetWithData = loadOffChainDataForAsset(deployedAsset, event.params.data)
   if (assetWithData == null) {
-    // Asset data could not be retrieved
+    log.error("Asset data could not be retrieved", [])
     return
   }
 

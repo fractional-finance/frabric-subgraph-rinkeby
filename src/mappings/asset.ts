@@ -1,3 +1,4 @@
+import { dataSource, log } from '@graphprotocol/graph-ts'
 import { NewProposal, YesVote, NoVote, AbstainVote } from '../generated/Frabric/Asset'
 import { Proposal, DeployedAsset } from '../generated/schema'
 import { createOrUpdateVote } from './helpers/vote'
@@ -21,7 +22,7 @@ export function handleNewProposal(event: NewProposal): void {
 
   let proposalWithData = loadOffChainDataForProposal(proposal, event.params.info)
   if (proposalWithData == null) {
-    // Proposal data could not be retrieved
+    log.error("Proposal data could not be retrieved", [])
     return
   }
 

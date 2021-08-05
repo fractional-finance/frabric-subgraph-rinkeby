@@ -1,4 +1,4 @@
-import { ipfs, json, JSONValueKind } from '@graphprotocol/graph-ts'
+import { ipfs, json, JSONValueKind, log } from '@graphprotocol/graph-ts'
 import { Proposal, Vote } from '../generated/schema'
 import { hashFromURI } from '../utils/ipfs'
 
@@ -14,7 +14,7 @@ import { hashFromURI } from '../utils/ipfs'
   
     let value = json.fromBytes(data)
     if (value.kind != JSONValueKind.OBJECT) {
-      // Root value type is invalid
+      log.error("Root value type is invalid", [])
       return null
     }
   
@@ -27,7 +27,7 @@ import { hashFromURI } from '../utils/ipfs'
       title.kind != JSONValueKind.STRING ||
       description.kind != JSONValueKind.STRING
     ) {
-      // One of the required value types is invalid
+      log.error("One of the required value types is invalid", [])
       return null
     }
   

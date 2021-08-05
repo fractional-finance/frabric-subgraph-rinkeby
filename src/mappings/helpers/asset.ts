@@ -1,4 +1,4 @@
-import { ipfs, json, JSONValueKind } from '@graphprotocol/graph-ts'
+import { ipfs, json, JSONValueKind, log } from '@graphprotocol/graph-ts'
 import { Asset } from '../generated/templates'
 import { hashFromURI } from '../utils/ipfs'
 
@@ -28,7 +28,7 @@ export function loadOffChainDataForAsset(asset: Asset, dataURI: string): Asset |
 
   let value = json.fromBytes(data)
   if (value.kind != JSONValueKind.OBJECT) {
-    // Root value type is invalid
+    log.error("Root value type is invalid", [])
     return null
   }
 
@@ -36,7 +36,7 @@ export function loadOffChainDataForAsset(asset: Asset, dataURI: string): Asset |
 
   let property = worldObject.get("property")
   if (property.kind != JSONValueKind.OBJECT) {
-    // Value type is invalid
+    log.error("Value type is invalid", [])
     return null
   }
 
@@ -62,7 +62,7 @@ export function loadOffChainDataForAsset(asset: Asset, dataURI: string): Asset |
     coverImage.kind != JSONValueKind.STRING ||
     rooms.kind != JSONValueKind.OBJECT
   ) {
-    // One of the required value types is invalid
+    log.error("One of the required value types is invalid", [])
     return null
   }
 
@@ -83,7 +83,7 @@ export function loadOffChainDataForAsset(asset: Asset, dataURI: string): Asset |
     bdCount.kind != JSONValueKind.NUMBER ||
     baCount.kind != JSONValueKind.NUMBER
   ) {
-    // One of the required value types is invalid
+    log.error("One of the required value types is invalid", [])
     return null
   }
 

@@ -1,3 +1,4 @@
+import { log } from '@graphprotocol/graph-ts'
 import { Proposal, Vote } from '../generated/schema'
 
 export function createOrUpdateVote(
@@ -18,7 +19,7 @@ export function createOrUpdateVote(
 
   let proposal = Proposal.load(proposalIdHex)
   if (proposal == null) {
-    // Can't vote on a non-existent proposal
+    log.error("Can't vote on a non-existent proposal", [])
     // TODO: Is it possible to throw an error here?
     return
   }
