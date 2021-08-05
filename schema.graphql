@@ -1,0 +1,45 @@
+# Enables searching assets by contract/token address
+# Might not actually work with field of Bytes type
+type _Schema_
+  @fulltext(
+    name: "assetSearch"
+    language: en
+    algorithm: rank
+    include: [{ entity: "MintedAsset", fields: [{ name: "contract" }] }]
+  )
+
+type MintedAsset @entity {
+  id: ID!
+  dataURI: String!
+}
+
+type DeployedAsset @entity {
+  id: ID!
+  contract: Bytes!
+  dataURI: String!
+  numOfShares: Int! # or BigInt?
+}
+
+type Proposal @entity {
+  id: ID!
+  creator: Bytes!
+  dataURI: String!
+  votes: [Vote!]! @derivedFrom(field: "proposal")
+
+  # TODO: Add fields:
+  #   - status (is completed, is passed etc.)
+  #   - start & end timestamps
+}
+
+type Vote @entity {
+  proposal: Proposal!
+  voter: Bytes!
+  voteType: VoteType!
+  strength: Int! # or BigInt?
+}
+
+enum VoteType {
+  Yes
+  No
+  Abstain
+}
