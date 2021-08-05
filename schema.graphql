@@ -25,10 +25,11 @@ type Proposal @entity {
   creator: Bytes!
   dataURI: String!
   votes: [Vote!]! @derivedFrom(field: "proposal")
+  startTimestamp: Int!
+  endTimestamp: Int!
 
   # TODO: Add fields:
   #   - status (is completed, is passed etc.)
-  #   - start & end timestamps
 }
 
 type Vote @entity {
