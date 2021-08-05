@@ -36,7 +36,7 @@ type Vote @entity {
   proposal: Proposal!
   voter: Bytes!
   voteType: VoteType!
-  strength: Int! # or BigInt?
+  count: Int! # or BigInt?
 }
 
 enum VoteType {
