@@ -6,30 +6,31 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Platform
-    network: xdai
+    network: mainnet
     source:
-      address: '0x0' # TODO: SET TO THE DEPLOYMENT ADDRESS
+      address: '0x1A3ba31074865d7E47f83ED439b1849E9bc0Ac9c' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: Platform
-      startBlock: 0 # TODO: SET TO THE DEPLOYMENT BLOCK
+      startBlock: 9 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: ./src/mappings/platform.ts
       entities:
-        - Asset
+        - MintedAsset
+        - DeployedAsset
       abis:
         - name: Platform
           file: ./abis/Platform.json
       eventHandlers:
-        - event: AssetMinted(uint256,string)
+        - event: AssetMinted(indexed uint256,string)
           handler: handleAssetMinted
-        - event: AssetDeployed(uint256,address,uint256,address,uint256)
+        - event: AssetDeployed(indexed uint256,indexed address,indexed uint256,address,uint256,string)
           handler: handleAssetDeployed
 templates:
   - name: Asset
     kind: ethereum/contract
-    network: xdai
+    network: mainnet
     source:
       abi: Asset
     mapping:
@@ -44,11 +45,11 @@ templates:
         - name: Asset
           file: ./abis/Asset.json
       eventHandlers:
-        - event: NewProposal(uint256,address,string)
+        - event: NewProposal(indexed uint256,indexed address,string,uint256,uint256)
           handler: handleNewProposal
-        - event: YesVote(uint256,address)
+        - event: YesVote(indexed uint256,indexed address,uint256)
           handler: handleYesVote
-        - event: NoVote(uint256,address)
+        - event: NoVote(indexed uint256,indexed address,uint256)
           handler: handleNoVote
-        - event: AbstainVote(uint256,address)
-          handler: handleAbstainVote
+        - event: Abstain(indexed uint256,indexed address,uint256)
+          handler: handleAbstain

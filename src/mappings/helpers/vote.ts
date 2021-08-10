@@ -1,10 +1,14 @@
 import { log } from '@graphprotocol/graph-ts'
-import { Proposal, Vote } from '../generated/schema'
+import { Proposal, Vote } from '../../../generated/schema'
+import {
+  Address,
+  BigInt
+} from "@graphprotocol/graph-ts";
 
 export function createOrUpdateVote(
-  proposalId: any,
-  voterAddress: any,
-  voteCount: any,
+  proposalId: BigInt,
+  voterAddress: Address,
+  voteCount: BigInt,
   voteType: string
 ): void {
   let proposalIdHex = proposalId.toHex()
@@ -24,9 +28,9 @@ export function createOrUpdateVote(
     return
   }
 
-  vote.proposal = proposal
+  vote.proposal = proposal.id
   vote.voter = voterAddress
   vote.voteType = voteType
-  vote.count = voteCount
+  vote.count = voteCount.toI32()
   vote.save()
 }

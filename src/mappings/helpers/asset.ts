@@ -1,5 +1,6 @@
-import { ipfs, json, JSONValueKind, log } from '@graphprotocol/graph-ts'
-import { Asset } from '../generated/templates'
+import { Bytes, ipfs, json, JSONValueKind, log } from '@graphprotocol/graph-ts'
+import { DeployedAsset } from '../../../generated/schema'
+import { Asset } from '../../../generated/templates/Asset/Asset'
 import { hashFromURI } from '../utils/ipfs'
 
 /*
@@ -22,9 +23,9 @@ import { hashFromURI } from '../utils/ipfs'
     }
   } 
  */
-export function loadOffChainDataForAsset(asset: Asset, dataURI: string): Asset | null {
+export function loadOffChainDataForAsset(asset: DeployedAsset, dataURI: string): DeployedAsset | null {
   let hash = hashFromURI(dataURI)
-  let data = ipfs.cat(hash)
+  let data = ipfs.cat(hash) as Bytes
 
   let value = json.fromBytes(data)
   if (value.kind != JSONValueKind.OBJECT) {

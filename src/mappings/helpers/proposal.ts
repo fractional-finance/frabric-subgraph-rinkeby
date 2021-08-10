@@ -1,5 +1,5 @@
-import { ipfs, json, JSONValueKind, log } from '@graphprotocol/graph-ts'
-import { Proposal, Vote } from '../generated/schema'
+import { Bytes, ipfs, json, JSONValueKind, log } from '@graphprotocol/graph-ts'
+import { Proposal, Vote } from '../../../generated/schema'
 import { hashFromURI } from '../utils/ipfs'
 
 /*
@@ -10,7 +10,7 @@ import { hashFromURI } from '../utils/ipfs'
  */
   export function loadOffChainDataForProposal(proposal: Proposal, dataURI: string): Proposal | null {
     let hash = hashFromURI(dataURI)
-    let data = ipfs.cat(hash)
+    let data = ipfs.cat(hash) as Bytes
   
     let value = json.fromBytes(data)
     if (value.kind != JSONValueKind.OBJECT) {

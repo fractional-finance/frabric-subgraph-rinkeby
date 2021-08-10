@@ -1,7 +1,7 @@
 import { DataSourceContext, log } from '@graphprotocol/graph-ts';
-import { AssetMinted, AssetDeployed } from '../generated/Frabric/Platform'
-import { MintedAsset, DeployedAsset } from '../generated/schema'
-import { Asset } from '../generated/templates'
+import { AssetMinted, AssetDeployed } from '../../generated/Platform/Platform'
+import { MintedAsset, DeployedAsset } from '../../generated/schema'
+import { Asset } from '../../generated/templates'
 import { loadOffChainDataForAsset } from './helpers/asset'
 
 export function handleAssetMinted(event: AssetMinted): void {
@@ -11,7 +11,7 @@ export function handleAssetMinted(event: AssetMinted): void {
 }
 
 export function handleAssetDeployed(event: AssetDeployed): void {
-  let id = event.params.id.toHex()
+  let id = event.params.assetID.toHex()
 
   let asset = MintedAsset.load(id)
   if (asset == null) {
@@ -21,10 +21,11 @@ export function handleAssetDeployed(event: AssetDeployed): void {
   }
 
   let deployedAsset = new DeployedAsset(id)
+  deployedAsset.symbol = event.params.symbol
   deployedAsset.contract = event.params.assetContract
-  deployedAsset.numOfShares = event.params.shares
+  deployedAsset.numOfShares = event.params.shares.toI32()
 
-  let assetWithData = loadOffChainDataForAsset(deployedAsset, event.params.data)
+  let assetWithData = loadOffChainDataForAsset(deployedAsset, asset.dataURI)
   if (assetWithData == null) {
     log.error("Asset data could not be retrieved", [])
     return

@@ -1,13 +1,3 @@
-# Enables searching assets by contract/token address
-# Might not actually work with field of Bytes type
-type _Schema_
-  @fulltext(
-    name: "assetSearch"
-    language: en
-    algorithm: rank
-    include: [{ entity: "DeployedAsset", fields: [{ name: "contract" }] }]
-  )
-
 type MintedAsset @entity {
   id: ID!
   dataURI: String!
@@ -16,6 +6,7 @@ type MintedAsset @entity {
 type DeployedAsset @entity {
   id: ID!
   contract: Bytes!
+  symbol: String!
   numOfShares: Int! # or BigInt?
   address: String!
   currentRent: Int!
