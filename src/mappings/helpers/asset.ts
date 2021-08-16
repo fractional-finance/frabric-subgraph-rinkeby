@@ -35,7 +35,15 @@ export function unpackDeployedAssetData(value: JSONValue, assetId: Value): void 
     return
   }
 
-  let worldObject = value.toObject()
+  let object = value.toObject()
+
+  let world = object.get("world")
+  if (world.kind != JSONValueKind.OBJECT) {
+    log.error("Value type is invalid", [])
+    return
+  }
+
+  let worldObject = world.toObject()
 
   let property = worldObject.get("property")
   if (property.kind != JSONValueKind.OBJECT) {
