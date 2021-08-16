@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Platform
-    network: mainnet
+    network: rinkeby
     source:
-      address: '0x1A3ba31074865d7E47f83ED439b1849E9bc0Ac9c' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
+      address: '0xa054f30A1317f368dEC35731B225F3D905372739' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: Platform
-      startBlock: 9 # SET TO THE ACTUAL DEPLOYMENT BLOCK
+      startBlock: 0 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -30,7 +30,7 @@ dataSources:
 templates:
   - name: Asset
     kind: ethereum/contract
-    network: mainnet
+    network: rinkeby
     source:
       abi: Asset
     mapping:
