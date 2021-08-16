@@ -10,7 +10,7 @@ dataSources:
     source:
       address: '0xa054f30A1317f368dEC35731B225F3D905372739' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: Platform
-      startBlock: 0 # SET TO THE ACTUAL DEPLOYMENT BLOCK
+      startBlock: 9127539 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
