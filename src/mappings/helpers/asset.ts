@@ -1,6 +1,5 @@
-import { Bytes, ipfs, json, JSONValueKind, log } from '@graphprotocol/graph-ts'
+import { ipfs, JSONValue, Value, JSONValueKind, log } from '@graphprotocol/graph-ts'
 import { DeployedAsset } from '../../../generated/schema'
-import { Asset } from '../../../generated/templates/Asset/Asset'
 import { hashFromURI } from '../utils/ipfs'
 
 /*
@@ -25,12 +24,15 @@ import { hashFromURI } from '../utils/ipfs'
  */
 export function loadOffChainDataForAsset(asset: DeployedAsset, dataURI: string): DeployedAsset | null {
   let hash = hashFromURI(dataURI)
-  let data = ipfs.cat(hash) as Bytes
+  ipfs.map(hash, 'unpackDeployedAssetData', Value.fromString(asset.id), ['json'])
 
-  let value = json.fromBytes(data)
+  return DeployedAsset.load(asset.id)
+}
+
+export function unpackDeployedAssetData(value: JSONValue, assetId: Value): void {
   if (value.kind != JSONValueKind.OBJECT) {
     log.error("Root value type is invalid", [])
-    return null
+    return
   }
 
   let worldObject = value.toObject()
@@ -38,7 +40,7 @@ export function loadOffChainDataForAsset(asset: DeployedAsset, dataURI: string):
   let property = worldObject.get("property")
   if (property.kind != JSONValueKind.OBJECT) {
     log.error("Value type is invalid", [])
-    return null
+    return
   }
 
   let propertyObject = property.toObject()
@@ -64,7 +66,13 @@ export function loadOffChainDataForAsset(asset: DeployedAsset, dataURI: string):
     rooms.kind != JSONValueKind.OBJECT
   ) {
     log.error("One of the required value types is invalid", [])
-    return null
+    return
+  }
+
+  let asset = DeployedAsset.load(assetId.toString())
+  if (asset == null) {
+    log.error("This contract's asset is not indexed properly", [])
+    return
   }
 
   asset.address = address.toString()
@@ -85,11 +93,11 @@ export function loadOffChainDataForAsset(asset: DeployedAsset, dataURI: string):
     baCount.kind != JSONValueKind.NUMBER
   ) {
     log.error("One of the required value types is invalid", [])
-    return null
+    return
   }
 
   asset.bdCount = bdCount.toBigInt().toI32()
   asset.baCount = baCount.toBigInt().toI32()
 
-  return asset
+  asset.save()
 }
