@@ -1,8 +1,7 @@
-import { dataSource, log } from '@graphprotocol/graph-ts'
-import { NewProposal, YesVote, NoVote, Abstain } from '../../generated/templates/Asset/Asset'
-import { Proposal, DeployedAsset } from '../../generated/schema'
+import { dataSource, log } from '@graphprotocol/graph-ts';
+import { NewProposal, YesVote, NoVote, Abstain } from '../../generated/templates/Asset/Asset';
+import { Proposal, DeployedAsset } from '../../generated/schema';
 import { createOrUpdateVote } from './helpers/vote'
-import { loadOffChainDataForProposal } from './helpers/proposal'
 
 export function handleNewProposal(event: NewProposal): void {
   let proposal = new Proposal(event.params.id.toHex())
@@ -16,16 +15,11 @@ export function handleNewProposal(event: NewProposal): void {
   proposal.asset = asset.id
 
   proposal.creator = event.params.creator
+  proposal.dataURI = event.params.info
   proposal.startTimestamp = event.params.start.toI32()
   proposal.endTimestamp = event.params.end.toI32()
 
-  let proposalWithData = loadOffChainDataForProposal(proposal, event.params.info)
-  if (proposalWithData == null) {
-    log.error("Proposal data could not be retrieved", [])
-    return
-  }
-
-  proposalWithData.save()
+  proposal.save()
 }
 
 export function handleYesVote(event: YesVote): void {

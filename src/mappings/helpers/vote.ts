@@ -1,5 +1,5 @@
-import { log } from '@graphprotocol/graph-ts'
-import { Proposal, Vote } from '../../../generated/schema'
+import { log } from '@graphprotocol/graph-ts';
+import { Proposal, Vote } from '../../../generated/schema';
 import {
   Address,
   BigInt

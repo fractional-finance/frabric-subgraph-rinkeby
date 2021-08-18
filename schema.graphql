@@ -1,32 +1,23 @@
 type MintedAsset @entity {
   id: ID!
   dataURI: String!
+  deployedAsset: DeployedAsset
 }
 
 type DeployedAsset @entity {
   id: ID!
+  mintedAsset: MintedAsset!
   contract: Bytes!
   symbol: String!
   numOfShares: Int! # or BigInt?
-  address: String!
-  currentRent: Int!
-  marketValue: Int!
-  area: Int!
-  bdCount: Int!
-  baCount: Int!
-  grossYieldPct: Int!
-  yearBuilt: Int!
-  coverImage: String!
-  description: String
-  proposals: [Proposal!]! @derivedFrom(field: "asset")
+  proposals: [Proposal!] @derivedFrom(field: "asset")
 }
 
 type Proposal @entity {
   id: ID!
   asset: DeployedAsset!
   creator: Bytes!
-  title: String!
-  description: String!
+  dataURI: String!
   votes: [Vote!]! @derivedFrom(field: "proposal")
   startTimestamp: Int!
   endTimestamp: Int!
