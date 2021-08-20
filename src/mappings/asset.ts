@@ -51,12 +51,16 @@ export function handleTransfer(event: Transfer): void {
   // If recipient is not the DEX
   if (recipient != asset.contract) {
     let ownershipId = assetId + "-" + recipient.toHexString()
-    let ownership = AssetOwnership.load(ownershipId)
+    var ownership = AssetOwnership.load(ownershipId)
     if (ownership == null) {
       ownership = new AssetOwnership(ownershipId)
+      ownership.asset = assetId
+      ownership.owner = recipient
+      ownership.shares = transferValue.toI32()
+    } else {
+      ownership.shares = ownership.shares + transferValue.toI32()
     }
 
-    ownership.shares = ownership.shares + transferValue.toI32()
     ownership.save()
 
     log.info("{} shares added to balance of {}}", [transferValue.toString(), recipient.toHexString()])
