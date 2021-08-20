@@ -45,6 +45,8 @@ templates:
         - name: Asset
           file: ./abis/Asset.json
       eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
         - event: NewProposal(indexed uint256,indexed address,string,uint256,uint256)
           handler: handleNewProposal
         - event: YesVote(indexed uint256,indexed address,uint256)

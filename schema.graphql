@@ -10,7 +10,15 @@ type DeployedAsset @entity {
   contract: Bytes!
   symbol: String!
   numOfShares: Int! # or BigInt?
+  owners: [AssetOwnership]! @derivedFrom(field: "asset")
   proposals: [Proposal!] @derivedFrom(field: "asset")
+}
+
+type AssetOwnership @entity {
+  id: ID!
+  asset: DeployedAsset!
+  owner: Bytes!
+  shares: Int!
 }
 
 type Proposal @entity {

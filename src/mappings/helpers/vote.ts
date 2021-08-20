@@ -11,17 +11,15 @@ export function createOrUpdateVote(
   voteCount: BigInt,
   voteType: string
 ): void {
-  let proposalIdHex = proposalId.toHex()
-  
-  let voterAddressString = voterAddress.toString()
-  let voteId = proposalIdHex + "-" + voterAddressString
+  let proposalIdString = proposalId.toString()
+  let voteId = proposalIdString + "-" + voterAddress.toHexString()
 
   let vote = Vote.load(voteId)
   if (vote == null) {
     vote = new Vote(voteId)
   }
 
-  let proposal = Proposal.load(proposalIdHex)
+  let proposal = Proposal.load(proposalIdString)
   if (proposal == null) {
     log.error("Can't vote on a non-existent proposal", [])
     // TODO: Is it possible to throw an error here?
