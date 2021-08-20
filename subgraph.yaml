@@ -8,9 +8,9 @@ dataSources:
     name: Platform
     network: rinkeby
     source:
-      address: '0xa054f30A1317f368dEC35731B225F3D905372739' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
+      address: '0x1bf266d48dA276d8a5Af05E056D69cD54d4A56AF' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: Platform
-      startBlock: 9127537 # SET TO THE ACTUAL DEPLOYMENT BLOCK
+      startBlock: 9140112 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
