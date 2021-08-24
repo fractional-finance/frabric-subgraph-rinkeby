@@ -10,7 +10,8 @@ type DeployedAsset @entity {
   contract: Bytes!
   symbol: String!
   numOfShares: Int! # or BigInt?
-  owners: [AssetOwnership]! @derivedFrom(field: "asset")
+  owners: [AssetOwnership!]! @derivedFrom(field: "asset")
+  marketOrders: [MarketOrder!]! @derivedFrom(field: "asset")
   proposals: [Proposal!] @derivedFrom(field: "asset")
 }
 
@@ -19,6 +20,19 @@ type AssetOwnership @entity {
   asset: DeployedAsset!
   owner: Bytes!
   shares: Int!
+}
+
+type MarketOrder @entity {
+  id: ID!
+  orderType: MarketOrderType!
+  asset: DeployedAsset!
+  price: BigInt!
+  amount: Int!
+}
+
+enum MarketOrderType {
+  Buy
+  Sell
 }
 
 type Proposal @entity {

@@ -47,6 +47,14 @@ templates:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
+        - event: NewBuyOrder(indexed uint256)
+          handler: handleNewBuyOrder
+        - event: NewSellOrder(indexed uint256)
+          handler: handleNewSellOrder
+        - event: OrderIncrease(indexed address,indexed uint256,uint256)
+          handler: handleOrderIncrease
+        - event: Filled(indexed address,indexed address,indexed uint256,uint256)
+          handler: handleFilled
         - event: NewProposal(indexed uint256,indexed address,string,uint256,uint256)
           handler: handleNewProposal
         - event: YesVote(indexed uint256,indexed address,uint256)

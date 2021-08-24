@@ -1,6 +1,6 @@
-import { Address, dataSource, log } from '@graphprotocol/graph-ts';
-import { Transfer, NewProposal, YesVote, NoVote, Abstain } from '../../generated/templates/Asset/Asset';
-import { AssetOwnership, Proposal, DeployedAsset } from '../../generated/schema';
+import { Address, dataSource, log, BigInt, store } from '@graphprotocol/graph-ts';
+import { Transfer, NewProposal, YesVote, NoVote, Abstain, OrderIncrease, Filled, NewBuyOrder, NewSellOrder } from '../../generated/templates/Asset/Asset';
+import { AssetOwnership, Proposal, DeployedAsset, MarketOrder } from '../../generated/schema';
 import { createOrUpdateVote } from './helpers/vote'
 
 export function handleTransfer(event: Transfer): void {
@@ -65,6 +65,68 @@ export function handleTransfer(event: Transfer): void {
 
     log.info("{} shares added to balance of {}}", [transferValue.toString(), recipient.toHexString()])
   }
+}
+
+export function handleNewBuyOrder(event: NewBuyOrder): void {
+  let assetId = dataSource.context().getString('id')
+  let price = event.params.price
+  let orderId = assetId + "-" + price.toString()
+
+  createOrReplaceOrder(assetId, orderId, "Buy", price)
+}
+
+export function handleNewSellOrder(event: NewSellOrder): void {
+  let assetId = dataSource.context().getString('id')
+  let price = event.params.price
+  let orderId = assetId + "-" + price.toString()
+
+  createOrReplaceOrder(assetId, orderId, "Sell", price)
+}
+
+function createOrReplaceOrder(assetId: string, orderId: string, orderType: string, price: BigInt): void {
+  var order = MarketOrder.load(orderId)
+  if (order == null) {
+    order = new MarketOrder(orderId)
+  }
+
+  order.orderType = orderType
+  order.asset = assetId
+  order.price = price
+  order.amount = 0
+
+  order.save()
+}
+
+export function handleOrderIncrease(event: OrderIncrease): void {
+  let assetId = dataSource.context().getString('id')
+
+  let price = event.params.price
+  let amount = event.params.amount
+
+  let orderId = assetId + "-" + price.toString()
+
+  var order = MarketOrder.load(orderId)
+  if (order == null) {
+    log.error("Order at this price must exist: {}", [price.toString()])
+    return
+  } 
+  
+  // Update order at this price level
+
+  order.amount = order.amount + amount.toI32()
+  order.save()
+}
+
+export function handleFilled(event: Filled): void {
+  let assetId = dataSource.context().getString('id')
+
+  let price = event.params.price
+
+  let orderId = assetId + "-" + price.toString()
+
+  // Remove order at this price level
+
+  store.remove('MarketOrder', orderId)
 }
 
 export function handleNewProposal(event: NewProposal): void {
