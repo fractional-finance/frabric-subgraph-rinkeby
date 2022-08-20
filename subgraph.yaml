@@ -8,7 +8,7 @@ dataSources:
     kind: ethereum/contract
     network: rinkeby
     source:
-      address: '0x0de7eef763f651799d18859c765363098BC11bB3' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
+      address: "0x0d443712225AD4D31C9086Fc7564cc86F8219567" # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: Frabric
       startBlock: 10616035 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
@@ -54,7 +54,7 @@ dataSources:
     kind: ethereum/contract
     network: rinkeby
     source:
-      address: '0x82B7A882c54d6F481257E03049c3442c0134f92E' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
+      address: "0x82B7A882c54d6F481257E03049c3442c0134f92E" # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: FrabricERC20
       startBlock: 10616035 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
@@ -116,7 +116,7 @@ dataSources:
     name: ThreadDeployer
     network: rinkeby
     source:
-      address: '0xf033246E5301FD64de5C2bE408262eCeFd2A3aC4' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
+      address: "0xf033246E5301FD64de5C2bE408262eCeFd2A3aC4" # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: ThreadDeployer
       startBlock: 10616035 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
@@ -140,7 +140,7 @@ dataSources:
     name: Bond
     network: rinkeby
     source:
-      address: '0x4e8DEF7A306C50c99c8f434bFA0D98aE6B790878' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
+      address: "0x4e8DEF7A306C50c99c8f434bFA0D98aE6B790878" # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: BondContract
       startBlock: 10616035 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
@@ -191,7 +191,7 @@ dataSources:
     name: Auction
     network: rinkeby
     source:
-      address: '0xb3D55b8cEA804d1BE18B6Db71400E7CEEC802B1B' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
+      address: "0xb3D55b8cEA804d1BE18B6Db71400E7CEEC802B1B" # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: Auction
       startBlock: 10616035 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
