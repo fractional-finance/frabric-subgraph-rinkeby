@@ -15,7 +15,7 @@ export function handleStateChange(event: StateChange): void {
 }
 
 export function handleDeposit(event: Deposit): void {
-  let crowdfund = new Crowdfund(event.address.toHexString())
+  let crowdfund = Crowdfund.load(event.address.toHexString())!
   crowdfund.amountDeposited = crowdfund.amountDeposited.plus(event.params.amount)
   crowdfund.save()
 
@@ -31,7 +31,7 @@ export function handleRefund(event: Refund): void {
 }
 
 export function handleWithdraw(event: Withdraw): void {
-  let crowdfund = new Crowdfund(event.address.toHexString())
+  let crowdfund = Crowdfund.load(event.address.toHexString())!
   crowdfund.amountDeposited = crowdfund.amountDeposited.minus(event.params.amount)
   crowdfund.save()
 

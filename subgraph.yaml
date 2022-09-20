@@ -138,6 +138,8 @@ dataSources:
       eventHandlers:
         - event: Thread(indexed address,indexed uint8,indexed address,address,bytes32)
           handler: handleThread
+        - event: CrowdfundedThread(indexed address,indexed address,indexed address,uint112)
+          handler: handleCrowdfundedThread
   - kind: ethereum/contract
     name: Bond
     network: goerli

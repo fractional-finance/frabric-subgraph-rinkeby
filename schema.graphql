@@ -271,7 +271,6 @@ type Crowdfund @entity {
   amountDeposited: BigInt!
   target: BigInt!
   thread: Thread!
-  erc20: FrabricERC20! # TODO: make sure it's a legal casting
   deposits: [CrowdfundDeposit!]! @derivedFrom(field: "crowdfund")
   withdrawals: [CrowdfundWithdrawal!]! @derivedFrom(field: "crowdfund")
   distributions: [CrowdfundDistribution!]! @derivedFrom(field: "crowdfund")
