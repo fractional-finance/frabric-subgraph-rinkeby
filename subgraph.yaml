@@ -23,6 +23,8 @@ dataSources:
           file: ./abis/Frabric.json
         - name: BeaconProxy
           file: ./abis/BeaconProxy.json
+        - name: FrabricERC20
+          file: ./abis/FrabricERC20.json
       eventHandlers:
         - event: BondRemovalProposal(indexed uint256,indexed address,indexed bool,uint256)
           handler: handleBondRemovalProposal
@@ -50,68 +52,68 @@ dataSources:
           handler: handleVote
         - event: Vouch(indexed address,indexed address)
           handler: handleVouch
-  - name: FRBC
-    kind: ethereum/contract
-    network: goerli
-    source:
-      address: '0x9018f685FdceE5d8A4Db8420C456c7CfBE42352E' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
-      abi: FrabricERC20
-      startBlock: 7559741 # SET TO THE ACTUAL DEPLOYMENT BLOCK
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.6
-      language: wasm/assemblyscript
-      file: ./src/mappings/frabricERC20.ts
-      entities:
-        - FrabricERC20
-        - FrabricERC20Holder
-        - FrabricERC20Balance
-        - FrabricERC20Transfer
-        - WhitelistRecord
-        - PricePoint
-        - Order
-      abis:
-        - name: FrabricERC20
-          file: ./abis/FrabricERC20.json
-        - name: BeaconProxy
-          file: ./abis/BeaconProxy.json
-        - name: Frabric
-          file: ./abis/Frabric.json
-      eventHandlers:
-        - event: Claim(indexed uint256,indexed address,uint112)
-          handler: handleClaim
-        - event: DelegateChanged(indexed address,indexed address,indexed address)
-          handler: handleDelegateChanged
-        - event: DelegateVotesChanged(indexed address,uint256,uint256)
-          handler: handleDelegateVotesChanged
-        - event: Distribution(indexed uint256,indexed address,uint112)
-          handler: handleDistribution
-        - event: Freeze(indexed address,uint64)
-          handler: handleFreeze
-        - event: GlobalAcceptance()
-          handler: handleGlobalAcceptance
-        - event: KYCUpdate(indexed address,indexed bytes32,indexed bytes32,uint256)
-          handler: handleKYCUpdate
-        - event: Order(indexed uint8,indexed uint256)
-          handler: handleOrder
-        - event: OrderCancellation(indexed address,indexed uint256,uint256)
-          handler: handleOrderCancellation
-        - event: OrderCancelling(indexed address,indexed uint256)
-          handler: handleOrderCancelling
-        - event: OrderFill(indexed address,indexed uint256,indexed address,uint256)
-          handler: handleOrderFill
-        - event: OrderIncrease(indexed address,indexed uint256,uint256)
-          handler: handleOrderIncrease
-        - event: Paused(address)
-          handler: handlePaused
-        - event: Removal(indexed address,uint256)
-          handler: handleRemoval
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-        - event: Unpaused(address)
-          handler: handleUnpaused
-        - event: Whitelisted(indexed address,indexed bool)
-          handler: handleWhitelisted
+  # - name: FRBC
+  #   kind: ethereum/contract
+  #   network: goerli
+  #   source:
+  #     address: '0x9018f685FdceE5d8A4Db8420C456c7CfBE42352E' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
+  #     abi: FrabricERC20
+  #     startBlock: 7559741 # SET TO THE ACTUAL DEPLOYMENT BLOCK
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.6
+  #     language: wasm/assemblyscript
+  #     file: ./src/mappings/frabricERC20.ts
+  #     entities:
+  #       - FrabricERC20
+  #       - FrabricERC20Holder
+  #       - FrabricERC20Balance
+  #       - FrabricERC20Transfer
+  #       - WhitelistRecord
+  #       - PricePoint
+  #       - Order
+  #     abis:
+  #       - name: FrabricERC20
+  #         file: ./abis/FrabricERC20.json
+  #       - name: BeaconProxy
+  #         file: ./abis/BeaconProxy.json
+  #       - name: Frabric
+  #         file: ./abis/Frabric.json
+  #     eventHandlers:
+  #       - event: Claim(indexed uint256,indexed address,uint112)
+  #         handler: handleClaim
+  #       - event: DelegateChanged(indexed address,indexed address,indexed address)
+  #         handler: handleDelegateChanged
+  #       - event: DelegateVotesChanged(indexed address,uint256,uint256)
+  #         handler: handleDelegateVotesChanged
+  #       - event: Distribution(indexed uint256,indexed address,uint112)
+  #         handler: handleDistribution
+  #       - event: Freeze(indexed address,uint64)
+  #         handler: handleFreeze
+  #       - event: GlobalAcceptance()
+  #         handler: handleGlobalAcceptance
+  #       - event: KYCUpdate(indexed address,indexed bytes32,indexed bytes32,uint256)
+  #         handler: handleKYCUpdate
+  #       - event: Order(indexed uint8,indexed uint256)
+  #         handler: handleOrder
+  #       - event: OrderCancellation(indexed address,indexed uint256,uint256)
+  #         handler: handleOrderCancellation
+  #       - event: OrderCancelling(indexed address,indexed uint256)
+  #         handler: handleOrderCancelling
+  #       - event: OrderFill(indexed address,indexed uint256,indexed address,uint256)
+  #         handler: handleOrderFill
+  #       - event: OrderIncrease(indexed address,indexed uint256,uint256)
+  #         handler: handleOrderIncrease
+  #       - event: Paused(address)
+  #         handler: handlePaused
+  #       - event: Removal(indexed address,uint256)
+  #         handler: handleRemoval
+  #       - event: Transfer(indexed address,indexed address,uint256)
+  #         handler: handleTransfer
+  #       - event: Unpaused(address)
+  #         handler: handleUnpaused
+  #       - event: Whitelisted(indexed address,indexed bool)
+  #         handler: handleWhitelisted
   - kind: ethereum/contract
     name: ThreadDeployer
     network: goerli
