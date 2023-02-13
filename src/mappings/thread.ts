@@ -13,9 +13,9 @@ import {
   BaseProposal, Thread, DissolutionProposal, 
   EcosystemLeaveWithUpgradesProposal, FrabricChangeProposal, GovernorChangeProposal, 
   ParticipantRemovalProposal, TokenActionProposal, UpgradeProposal, 
-  Vote, Frabric, DesriptorChangeProposal 
+  Vote, Frabric, DesriptorChangeProposal, PaperProposal 
 } from '../../generated/schema';
-import { proposalStateAtIndex, voteDirectionAtIndex } from './helpers/types'
+import { commonProposalTypeForCode, proposalStateAtIndex, voteDirectionAtIndex } from './helpers/types'
 import { getFrabric } from './helpers/frabric';
 
 // ### THREAD STRUCTURE ###
@@ -222,6 +222,16 @@ export function handleProposal(event: Proposal): void {
   proposal.startTimestamp = event.block.timestamp.toI32()
   proposal.endTimestamp = proposal.startTimestamp + contract.votingPeriod().toI32()
   proposal.save()
+
+  // Handling a special case where 'Paper' proposal type has to be extracted from
+  // the general base proposal
+
+  if (commonProposalTypeForCode(proposal.type) == "Paper") {
+    let paperProposal = new PaperProposal(event.params.id.toHexString())
+    paperProposal.thread = event.address.toHexString()
+    paperProposal.baseProposal = proposal.id
+    paperProposal.save()
+  }
 }
 
 export function handleProposalStateChange(event: ProposalStateChange): void {

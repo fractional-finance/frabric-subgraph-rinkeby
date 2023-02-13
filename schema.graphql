@@ -209,7 +209,8 @@ type ParticipantRemovalProposal @entity {
 
 type PaperProposal @entity {
   id: ID!
-  frabric: Frabric!
+  frabric: Frabric
+  thread: Thread
   baseProposal: BaseProposal!
 }
 
