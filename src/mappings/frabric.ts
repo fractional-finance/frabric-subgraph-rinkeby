@@ -25,7 +25,10 @@ import { getFrabric } from './helpers/frabric';
 export function handleProposal(event: Proposal): void {
   let contract = FrabricContract.bind(event.address)
 
-  let proposal = new BaseProposal(event.params.id.toHexString())
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+
+  let proposal = new BaseProposal(baseProposalId)
+  proposal.proposalId = event.params.id.toHexString()
   proposal.frabric = event.address.toHexString()
   proposal.creator = event.params.creator
   // TODO: Smart-map it to a type convenient for the frontend
@@ -49,7 +52,9 @@ export function handleProposal(event: Proposal): void {
 }
 
 export function handleProposalStateChange(event: ProposalStateChange): void {
-  let proposal = new BaseProposal(event.params.id.toHexString())
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+
+  let proposal = new BaseProposal(baseProposalId)
   proposal.state =  proposalStateAtIndex(event.params.state)
   proposal.save()
 }
@@ -57,8 +62,10 @@ export function handleProposalStateChange(event: ProposalStateChange): void {
 export function handleVote(event: VoteEvent): void {
   let voteId = event.params.id.toHexString().concat("_").concat(event.params.voter.toHexString())
 
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+
   let vote = new Vote(voteId)
-  vote.proposal = BaseProposal.load(event.params.id.toHexString())!.id
+  vote.proposal = BaseProposal.load(baseProposalId)!.id
   vote.voter = event.params.voter
   vote.voteDirection = voteDirectionAtIndex(event.params.direction)
   vote.count = event.params.votes
@@ -68,21 +75,23 @@ export function handleVote(event: VoteEvent): void {
 export function handleBondRemovalProposal(event: BondRemovalProposalEvent): void {
   let frabric = Frabric.load(event.address.toHexString())!
 
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   let proposal = new BondRemovalProposal(event.params.id.toHexString())
   proposal.frabric = frabric.id
   proposal.participant = event.params.participant
   proposal.slash = event.params.slash
   proposal.amount = event.params.amount
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
 export function handleParticipantProposal(event: ParticipantProposalEvent): void {
   let frabric = Frabric.load(event.address.toHexString())!
 
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   let proposal = new ParticipantProposal(event.params.id.toHexString())
   proposal.frabric = frabric.id
@@ -90,27 +99,29 @@ export function handleParticipantProposal(event: ParticipantProposalEvent): void
   proposal.proposer = event.params.proposer
   proposal.participant = event.params.participant
   proposal.participantType = frabricParticipantTypeAtIndex(event.params.participantType)
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
 export function handleParticipantRemovalProposal(event: ParticipantRemovalProposalEvent): void {
   let frabric = Frabric.load(event.address.toHexString())!
 
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   let proposal = new ParticipantRemovalProposal(event.params.id.toHexString())
   proposal.frabric = frabric.id
   proposal.participant = event.params.participant
   proposal.removalFee = event.params.fee
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
 export function handleThreadProposal(event: ThreadProposalEvent): void {
   let frabric = Frabric.load(event.address.toHexString())!
 
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   let proposal = new ThreadProposal(event.params.id.toHexString())
   proposal.frabric = frabric.id
@@ -119,27 +130,29 @@ export function handleThreadProposal(event: ThreadProposalEvent): void {
   proposal.symbol = event.params.symbol
   proposal.descriptor = event.params.descriptor
   proposal.data = event.params.data
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
 export function handleThreadProposalProposal(event: ThreadProposalProposalEvent): void {
   let frabric = Frabric.load(event.address.toHexString())!
 
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   let proposal = new ThreadProposalProposal(event.params.id.toHexString())
   proposal.frabric = frabric.id
   proposal.thread = event.params.thread
   proposal.info = event.params.info
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
 export function handleTokenActionProposal(event: TokenActionProposalEvent): void {
   let frabric = Frabric.load(event.address.toHexString())!
 
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   let proposal = new TokenActionProposal(event.params.id.toHexString())
   proposal.frabric = frabric.id
@@ -148,14 +161,15 @@ export function handleTokenActionProposal(event: TokenActionProposalEvent): void
   proposal.mint = event.params.mint
   proposal.price = event.params.price
   proposal.amount = event.params.amount
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
 export function handleUpgradeProposal(event: UpgradeProposalEvent): void {
   let frabric = Frabric.load(event.address.toHexString())!
 
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   let proposal = new UpgradeProposal(event.params.id.toHexString())
   proposal.frabric = frabric.id
@@ -164,7 +178,7 @@ export function handleUpgradeProposal(event: UpgradeProposalEvent): void {
   proposal.version = event.params.version
   proposal.code = event.params.code
   proposal.data = event.params.data
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 

@@ -57,7 +57,8 @@ export function handleDescriptorChangeProposal(event: DescriptorChangeProposalEv
   log.info("Calling {}", ["handleDescriptorChangeProposal"])
 
   // Take the previously created base proposal
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   // Create the specific proposal record composed
   // with the base proposal
@@ -65,7 +66,7 @@ export function handleDescriptorChangeProposal(event: DescriptorChangeProposalEv
   let proposal = new DesriptorChangeProposal(event.params.id.toHexString())
   proposal.thread = event.address.toHexString()
   proposal.descriptor = event.params.descriptor
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
@@ -73,7 +74,8 @@ export function handleGovernorChangeProposal(event: GovernorChangeProposalEvent)
   log.info("Calling {}", ["handleGovernorChangeProposal"])
 
   // Take the previously created base proposal
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   // Create the specific proposal record composed
   // with the base proposal
@@ -81,7 +83,7 @@ export function handleGovernorChangeProposal(event: GovernorChangeProposalEvent)
   let proposal = new GovernorChangeProposal(event.params.id.toHexString())
   proposal.thread = event.address.toHexString()
   proposal.governor = event.params.governor
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
@@ -89,7 +91,8 @@ export function handleParticipantRemovalProposal(event: ParticipantRemovalPropos
   log.info("Calling {}", ["handleParticipantRemovalProposal"])
 
   // Take the previously created base proposal
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   // Create the specific proposal record composed
   // with the base proposal
@@ -98,7 +101,7 @@ export function handleParticipantRemovalProposal(event: ParticipantRemovalPropos
   proposal.thread = event.address.toHexString()
   proposal.participant = event.params.participant
   proposal.removalFee = event.params.fee
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
@@ -106,7 +109,8 @@ export function handleTokenActionProposal(event: TokenActionProposalEvent): void
   log.info("Calling {}", ["handleTokenActionProposal"])
 
   // Take the previously created base proposal
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   // Create the specific proposal record composed
   // with the base proposal
@@ -118,7 +122,7 @@ export function handleTokenActionProposal(event: TokenActionProposalEvent): void
   proposal.mint = event.params.mint
   proposal.price = event.params.price
   proposal.amount = event.params.amount
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
@@ -126,7 +130,8 @@ export function handleUpgradeProposal(event: UpgradeProposalEvent): void {
   log.info("Calling {}", ["handleUpgradeProposal"])
 
   // Take the previously created base proposal
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   // Create the specific proposal record composed
   // with the base proposal
@@ -138,7 +143,7 @@ export function handleUpgradeProposal(event: UpgradeProposalEvent): void {
   proposal.version = event.params.version
   proposal.code = event.params.code
   proposal.data = event.params.data
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
@@ -146,7 +151,8 @@ export function handleDissolutionProposal(event: DissolutionProposalEvent): void
   log.info("Calling {}", ["handleDissolutionProposal"])
 
   // Take the previously created base proposal
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   // Create the specific proposal record composed
   // with the base proposal
@@ -155,7 +161,7 @@ export function handleDissolutionProposal(event: DissolutionProposalEvent): void
   proposal.thread = event.address.toHexString()
   proposal.token = event.params.token
   proposal.price = event.params.price
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
@@ -163,7 +169,8 @@ export function handleFrabricChangeProposal(event: FrabricChangeProposalEvent): 
   log.info("Calling {}", ["handleFrabricChangeProposal"])
 
   // Take the previously created base proposal
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   // Create the specific proposal record composed
   // with the base proposal
@@ -172,7 +179,7 @@ export function handleFrabricChangeProposal(event: FrabricChangeProposalEvent): 
   proposal.thread = event.address.toHexString()
   proposal.frabric = event.params.frabric
   proposal.governor = event.params.governor
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
@@ -182,7 +189,8 @@ export function handleEcosystemLeaveWithUpgradesProposal(
   log.info("Calling {}", ["handleEcosystemLeaveWithUpgradesProposal"])
 
   // Take the previously created base proposal
-  let baseProposal = BaseProposal.load(event.params.id.toHexString())!
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let baseProposal = BaseProposal.load(baseProposalId)!
 
   // Create the specific proposal record composed
   // with the base proposal
@@ -191,7 +199,7 @@ export function handleEcosystemLeaveWithUpgradesProposal(
   proposal.thread = event.address.toHexString()
   proposal.frabric = event.params.frabric
   proposal.governor = event.params.governor
-  proposal.baseProposal = baseProposal.id
+  proposal.baseProposal = proposal.id
   proposal.save()
 }
 
@@ -200,7 +208,10 @@ export function handleProposal(event: Proposal): void {
 
   let contract = ThreadContract.bind(event.address)
 
-  let proposal = new BaseProposal(event.params.id.toHexString())
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+
+  let proposal = new BaseProposal(baseProposalId)
+  proposal.proposalId = event.params.id.toHexString()
   proposal.thread = event.address.toHexString()
   proposal.creator = event.params.creator
   // TODO: Smart-map it to a type convenient for the frontend
@@ -216,7 +227,8 @@ export function handleProposal(event: Proposal): void {
 export function handleProposalStateChange(event: ProposalStateChange): void {
   log.info("Calling {}", ["handleProposalStateChange"])
 
-  let proposal = new BaseProposal(event.params.id.toHexString())
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+  let proposal = new BaseProposal(baseProposalId)
   proposal.state =  proposalStateAtIndex(event.params.state)
   proposal.save()
 }
@@ -226,8 +238,10 @@ export function handleVote(event: VoteEvent): void {
 
   let voteId = event.params.id.toHexString().concat("_").concat(event.params.voter.toHexString())
 
+  let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
+
   let vote = new Vote(voteId)
-  vote.proposal = BaseProposal.load(event.params.id.toHexString())!.id
+  vote.proposal = BaseProposal.load(baseProposalId)!.id
   vote.voter = event.params.voter
   vote.voteDirection = voteDirectionAtIndex(event.params.direction)
   vote.count = event.params.votes

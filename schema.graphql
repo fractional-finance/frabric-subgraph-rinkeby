@@ -224,6 +224,7 @@ enum CommonProposalType {
 
 type BaseProposal @entity {
   id: ID!
+  proposalId: String!
   thread: Thread
   frabric: Frabric
   creator: Bytes!
