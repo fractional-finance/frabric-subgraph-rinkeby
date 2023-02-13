@@ -1,16 +1,16 @@
 specVersion: 0.0.4
-description: Frabric Protocol
+description: Weavr Protocol
 repository: https://github.com/fractional-finance/the-frabric-subgraph
 schema:
   file: ./schema.graphql
 dataSources:
   - name: Frabric
     kind: ethereum/contract
-    network: goerli
+    network: arbitrum-goerli
     source:
-      address: '0xc704FfF47cf29576e095DB0e14198B769f8E3A23' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
+      address: '0x70732A738cB59Ffdc5647608DFaAfae35Cae85A1' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: Frabric
-      startBlock: 7559770 # SET TO THE ACTUAL DEPLOYMENT BLOCK
+      startBlock: 4407135   # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -54,7 +54,7 @@ dataSources:
           handler: handleVouch
   # - name: FRBC
   #   kind: ethereum/contract
-  #   network: goerli
+  #   network: arbitrum-goerli
   #   source:
   #     address: '0x9018f685FdceE5d8A4Db8420C456c7CfBE42352E' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
   #     abi: FrabricERC20
@@ -116,11 +116,11 @@ dataSources:
   #         handler: handleWhitelisted
   - kind: ethereum/contract
     name: ThreadDeployer
-    network: goerli
+    network: arbitrum-goerli
     source:
-      address: '0x2294AC07f9ACeD6065d2837a4E03ab8682Aa895C' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
+      address: '0xb0a230d7A56dec2524e3afAeB0D0cA8e0Bc45924' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: ThreadDeployer
-      startBlock: 7559797 # SET TO THE ACTUAL DEPLOYMENT BLOCK
+      startBlock: 4407135 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -142,11 +142,11 @@ dataSources:
           handler: handleCrowdfundedThread
   - kind: ethereum/contract
     name: Bond
-    network: goerli
+    network: arbitrum-goerli
     source:
-      address: '0x50f82a8EeAea297aeC7932D47CB0EAF5fa40f382' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
+      address: '0x4f995659824E51B3461397C922E48ca0C2752007' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: BondContract
-      startBlock: 7559782 # SET TO THE ACTUAL DEPLOYMENT BLOCK
+      startBlock: 4407135 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -171,7 +171,7 @@ dataSources:
           handler: handleUnbond
   # - kind: ethereum/contract
   #   name: Timelock
-  #   network: goerli
+  #   network: arbitrum-goerli
   #   source:
   #     address: '0x0000000000000000000000000000000000000000' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
   #     abi: Timelock
@@ -193,11 +193,11 @@ dataSources:
   #         handler: handleLock
   - kind: ethereum/contract
     name: Auction
-    network: goerli
+    network: arbitrum-goerli
     source:
-      address: '0x50F672E24Aebe47A72b0218a57C66162E8CbbF97' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
+      address: '0x4e022c910339f320f08817dc0596a92044913C02' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: Auction
-      startBlock: 7459200 # SET TO THE ACTUAL DEPLOYMENT BLOCK
+      startBlock: 4407135 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -219,7 +219,7 @@ dataSources:
 templates:
   - name: Crowdfund
     kind: ethereum/contract
-    network: goerli
+    network: arbitrum-goerli
     source:
       abi: Crowdfund
     mapping:
@@ -255,7 +255,7 @@ templates:
           handler: handleWithdraw
   - name: Thread
     kind: ethereum/contract
-    network: goerli
+    network: arbitrum-goerli
     source:
       abi: Thread
     mapping:
@@ -313,7 +313,7 @@ templates:
           handler: handleVote
   - name: FrabricERC20
     kind: ethereum/contract
-    network: goerli
+    network: arbitrum-goerli
     source:
       abi: FrabricERC20
     mapping:
