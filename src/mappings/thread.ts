@@ -66,7 +66,7 @@ export function handleDescriptorChangeProposal(event: DescriptorChangeProposalEv
   let proposal = new DesriptorChangeProposal(event.params.id.toHexString())
   proposal.thread = event.address.toHexString()
   proposal.descriptor = event.params.descriptor
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -83,7 +83,7 @@ export function handleGovernorChangeProposal(event: GovernorChangeProposalEvent)
   let proposal = new GovernorChangeProposal(event.params.id.toHexString())
   proposal.thread = event.address.toHexString()
   proposal.governor = event.params.governor
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -101,7 +101,7 @@ export function handleParticipantRemovalProposal(event: ParticipantRemovalPropos
   proposal.thread = event.address.toHexString()
   proposal.participant = event.params.participant
   proposal.removalFee = event.params.fee
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -122,7 +122,7 @@ export function handleTokenActionProposal(event: TokenActionProposalEvent): void
   proposal.mint = event.params.mint
   proposal.price = event.params.price
   proposal.amount = event.params.amount
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -143,7 +143,7 @@ export function handleUpgradeProposal(event: UpgradeProposalEvent): void {
   proposal.version = event.params.version
   proposal.code = event.params.code
   proposal.data = event.params.data
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -161,7 +161,7 @@ export function handleDissolutionProposal(event: DissolutionProposalEvent): void
   proposal.thread = event.address.toHexString()
   proposal.token = event.params.token
   proposal.price = event.params.price
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -179,7 +179,7 @@ export function handleFrabricChangeProposal(event: FrabricChangeProposalEvent): 
   proposal.thread = event.address.toHexString()
   proposal.frabric = event.params.frabric
   proposal.governor = event.params.governor
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -199,7 +199,7 @@ export function handleEcosystemLeaveWithUpgradesProposal(
   proposal.thread = event.address.toHexString()
   proposal.frabric = event.params.frabric
   proposal.governor = event.params.governor
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 

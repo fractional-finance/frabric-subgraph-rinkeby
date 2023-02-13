@@ -83,7 +83,7 @@ export function handleBondRemovalProposal(event: BondRemovalProposalEvent): void
   proposal.participant = event.params.participant
   proposal.slash = event.params.slash
   proposal.amount = event.params.amount
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -99,7 +99,7 @@ export function handleParticipantProposal(event: ParticipantProposalEvent): void
   proposal.proposer = event.params.proposer
   proposal.participant = event.params.participant
   proposal.participantType = frabricParticipantTypeAtIndex(event.params.participantType)
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -113,7 +113,7 @@ export function handleParticipantRemovalProposal(event: ParticipantRemovalPropos
   proposal.frabric = frabric.id
   proposal.participant = event.params.participant
   proposal.removalFee = event.params.fee
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -130,7 +130,7 @@ export function handleThreadProposal(event: ThreadProposalEvent): void {
   proposal.symbol = event.params.symbol
   proposal.descriptor = event.params.descriptor
   proposal.data = event.params.data
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -144,7 +144,7 @@ export function handleThreadProposalProposal(event: ThreadProposalProposalEvent)
   proposal.frabric = frabric.id
   proposal.thread = event.params.thread
   proposal.info = event.params.info
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -161,7 +161,7 @@ export function handleTokenActionProposal(event: TokenActionProposalEvent): void
   proposal.mint = event.params.mint
   proposal.price = event.params.price
   proposal.amount = event.params.amount
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
@@ -178,7 +178,7 @@ export function handleUpgradeProposal(event: UpgradeProposalEvent): void {
   proposal.version = event.params.version
   proposal.code = event.params.code
   proposal.data = event.params.data
-  proposal.baseProposal = proposal.id
+  proposal.baseProposal = baseProposal.id
   proposal.save()
 }
 
