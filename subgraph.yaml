@@ -11,7 +11,7 @@ dataSources:
     source:
       address: '0x70732A738cB59Ffdc5647608DFaAfae35Cae85A1' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: Frabric
-      startBlock: 4407135   # SET TO THE ACTUAL DEPLOYMENT BLOCK
+      startBlock: 7715000   # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -121,7 +121,7 @@ dataSources:
     source:
       address: '0xb0a230d7A56dec2524e3afAeB0D0cA8e0Bc45924' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: ThreadDeployer
-      startBlock: 4407135 # SET TO THE ACTUAL DEPLOYMENT BLOCK
+      startBlock: 7715000 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -147,7 +147,7 @@ dataSources:
     source:
       address: '0x4f995659824E51B3461397C922E48ca0C2752007' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: BondContract
-      startBlock: 4407135 # SET TO THE ACTUAL DEPLOYMENT BLOCK
+      startBlock: 7715000 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -198,7 +198,7 @@ dataSources:
     source:
       address: '0x4e022c910339f320f08817dc0596a92044913C02' # SET TO THE ACTUAL DEPLOYMENT ADDRESS
       abi: Auction
-      startBlock: 4407135 # SET TO THE ACTUAL DEPLOYMENT BLOCK
+      startBlock: 7715000 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
