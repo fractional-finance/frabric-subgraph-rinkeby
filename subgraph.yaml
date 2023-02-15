@@ -1,4 +1,5 @@
 specVersion: 0.0.4
+
 description: Weavr Protocol
 repository: https://github.com/fractional-finance/the-frabric-subgraph
 schema:
@@ -13,7 +14,7 @@ dataSources:
       startBlock: 4407135   # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       file: ./src/mappings/frabric.ts
       entities:
@@ -61,7 +62,7 @@ dataSources:
   #     startBlock: 7559741 # SET TO THE ACTUAL DEPLOYMENT BLOCK
   #   mapping:
   #     kind: ethereum/events
-  #     apiVersion: 0.0.6
+  #     apiVersion: 0.0.7
   #     language: wasm/assemblyscript
   #     file: ./src/mappings/frabricERC20.ts
   #     entities:
@@ -123,7 +124,7 @@ dataSources:
       startBlock: 4407135 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       file: ./src/mappings/threadDeployer.ts
       entities:
@@ -149,7 +150,7 @@ dataSources:
       startBlock: 4407135 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       file: ./src/mappings/bond.ts
       entities:
@@ -178,7 +179,7 @@ dataSources:
   #     startBlock: 10616035 # SET TO THE ACTUAL DEPLOYMENT BLOCK
   #   mapping:
   #     kind: ethereum/events
-  #     apiVersion: 0.0.6
+  #     apiVersion: 0.0.7
   #     language: wasm/assemblyscript
   #     file: ./src/mappings/timelock.ts
   #     entities:
@@ -200,7 +201,7 @@ dataSources:
       startBlock: 4407135 # SET TO THE ACTUAL DEPLOYMENT BLOCK
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       file: ./src/mappings/auction.ts
       entities:
@@ -224,7 +225,7 @@ templates:
       abi: Crowdfund
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       file: ./src/mappings/crowdfund.ts
       entities:
@@ -260,7 +261,7 @@ templates:
       abi: Thread
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       file: ./src/mappings/thread.ts
       entities:
@@ -318,7 +319,7 @@ templates:
       abi: FrabricERC20
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       file: ./src/mappings/frabricERC20.ts
       entities:
