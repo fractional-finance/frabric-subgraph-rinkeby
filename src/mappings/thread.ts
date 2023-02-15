@@ -239,6 +239,7 @@ export function handleProposalStateChange(event: ProposalStateChange): void {
 
   let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
   let proposal = new BaseProposal(baseProposalId)
+  proposal.proposalId = event.params.id.toHexString()
   proposal.state =  proposalStateAtIndex(event.params.state)
   proposal.save()
 }
