@@ -238,8 +238,7 @@ export function handleProposalStateChange(event: ProposalStateChange): void {
   log.info("Calling {}", ["handleProposalStateChange"])
 
   let baseProposalId = event.address.toHexString().concat("_").concat(event.params.id.toHexString())
-  let proposal = new BaseProposal(baseProposalId)
-  proposal.proposalId = event.params.id.toHexString()
+  let proposal = BaseProposal.load(baseProposalId)!
   proposal.state =  proposalStateAtIndex(event.params.state)
   proposal.save()
 }
