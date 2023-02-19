@@ -10,19 +10,9 @@
     "remove-local": "graph remove --node http://localhost:8020/ the-frabric",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 the-frabric"
   },
-  "devDependencies": {
+  "dependencies": {
     "@graphprotocol/graph-cli": "^0.40.0",
     "@graphprotocol/graph-ts": "^0.27.0",
-    "assemblyscript": "^0.20.6"
-  },
-  "dependencies": {
-    "@assemblyscript/loader": "^0.19.10",
-    "babel-polyfill": "^6.26.0",
-    "babel-register": "^6.26.0",
-    "matchstick-as": "^0.4.4",
-    "truffle": "^5.0.4",
-    "truffle-contract": "^4.0.5",
-    "truffle-hdwallet-provider": "^1.0.4",
-    "typescript": "^4.3.5"
+    "matchstick-as": "^0.5.1"
   }
 }
