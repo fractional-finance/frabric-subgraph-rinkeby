@@ -49,6 +49,8 @@ export function handleRemoval(event: Removal): void {
   let whitelistRecord = new WhitelistRecord(
     token.id.concat("_").concat(event.params.person.toHexString())
   )
+  whitelistRecord.frabricERC20 = token.id
+  whitelistRecord.person = event.params.person
   whitelistRecord.removed = true
   whitelistRecord.save()
 }
